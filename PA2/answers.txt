@@ -1,0 +1,6 @@
+When a problem comes along, you must zip it!
+0 1 1 2 3 5
+1 t 701
+176 2
+5 115
+1 6 3 2 5 4

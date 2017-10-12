@@ -1,0 +1,22 @@
+creating cache:
+	struct MyLine{
+		int valid;
+		unsigned int tag;
+	};
+	struct MyLine *theCache;
+	theCache = malloc(sizeof(struct MyLine) * #lines)
+	write subroutines: getSet to get beginning of specific set
+
+
+0x0000000000401848
+0x0000000000401874
+
+0x55652108 buf
+cookie: 0x244b28be
+32 34 34 62 32 38 62 65
+
+
+hexmatch: 4018ca
+touch3: 401948
+
+40183c

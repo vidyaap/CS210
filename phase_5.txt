@@ -1,0 +1,102 @@
+rsp + 8 = 2
+rsp + 12 = 1; 15
+eax = 0; loop: 2; 14; 6; 15
+ecx = 0; loop: 2; 16; 22; 37
+edx = 1; 2; 3; 4
+0x402600(,rax,4) = eax*4 + 10
+
+notes:
+- i have no idea why 34 (0x22) truncates to 0xf
+- i need to figure out how to get this (0x402600(,rax,4)) to repeat 15 times
+   before eax = 15 so that edx = 15 so that i dont blow up my bomb
+
+trials to test truncation:
+eax = 16 - edx = 6
+eax = 2 - edx = 3
+eax = 3 - edx = 13
+eax = 4 - edx = 8
+eax = 5 - edx = 15
+eax = 6 - edx = 
+
+
+take 2
+rsp+12 = 5
+rsp+8 = 2
+edx = loop: 12
+eax = loop: 5; 12; 3; 7; 11; 13; 9; 4; 8; 0; 10; 1; 2; 14; 6; 15
+ecx = 0; loop: 12; 15; 22; 33; 46; 55; 59; 67; 67; 77; 78; 80; 94; 100; 115
+
+
+
+PHASE 6: 432123
+rsp+48 = 0; 4(1st val)
+rsi = 0; 51
+r13 = 3; 4; 3(idek why.....?)
+r12d = 0; (this will happen 6 times ->)1; 2
+rbp = 4; 3(after jumping back to 31)
+eax = 4; 3; 1(b/c rax); 3(after 1st mov); 2(after 2nd mov); 1(after 3rd mov)
+         2(after 4th mov); 3(after 5th mov)
+      3(bc r13); 2(after sub); 2(after mov); 1(after mov2); 2(after mov3);
+         3(after mov4); 
+ebx (and rax at the mov line) = 1; 2; 3; 4; 5; 6
+                                2; 3; 4; 5
+4rax + rsp + 48 = 0x7fffffffe1e4
+-> NO VAL CAN BE FIRST VAL
+
+
+PHASE 6: 543210
+
+ebx = 1; 2; 3; 4; 5
+         2; 3; 4; 5
+            3; 4; 5
+               4; 5
+                  5
+eax = 4; 4(after loop1); 3(after loop2); 2(after loop3); 1(after loop4);
+                         3(after loop2,2); 2; 1
+                                         2(after loop3,3); 1(after loop4,3)
+                                                           1(after loop4,4)
+rsp+48 = 5(1st val)
+rsi = 48
+r13 = 5(1st val)
+r12d = 1; 2; 3; 4; 5
+rbp = 5
+
+
+
+set rsi to 0
+rsp is loaded with inputs starting at rsp+48
+load r13 w first val
+set outer loop counter to 0 (r12d)
+set rbp to first val (or val in r13)
+move r13 into eax
+subtract 1 from eax
+compare new eax with 5 (no number can be greater than 6)
+
+
+
+<node1>: "?" (63)
+<node2>: -11 
+<node3>: -45
+<node4>: -22
+<node5>: 12
+<node6>: 63, 449
+
+
+
+rdx = 6; 1; 5; 2; 4; 3
+
+rsp = 6308592; rsp+8 = 6308672; rsp+48 = 1(1st input)
+rsi = 6
+rcx = <node6>: 449; 
+<node1>: 63; <node5>: 524; <node2>: 501; <node4>: 746; (<node3>: 467)
+rdx = <node1>: 63; <node5>: 12; <node2>: -11; <node4>: -22; <node3>: 467
+
+
+
+
+
+
+
+
+
+
